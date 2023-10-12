@@ -6,14 +6,18 @@ RUN set -x \
     # Configurando usuario NGINX
     && sed -i "s/user\ nginx\;/user\ nobody\;/g" /etc/nginx/nginx.conf \
     && sed -i "s|upload_max_filesize = 2M|upload_max_filesize = 200M|g" /etc/php7/php.ini \
-    # Instalando Dokuwiki
-    && mkdir -p /var/www/localhost/htdocs/ && cd / \
+    # Baixando Dokuwiki
+    && mkdir -p /var/www/localhost/htdocs/ && cd /opt/ \
     && wget https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz && tar zxvf dokuwiki-stable.tgz && rm -rf dokuwiki-stable.tgz \
-    && mv dokuwiki-* dokuwiki && chown -R nobody:nobody dokuwiki && chmod -R 700 dokuwiki/ && ln -s /dokuwiki /var/www/localhost/htdocs/dokuwiki
-
+    && mv dokuwiki-* .dokuwiki && chown -R nobody:nobody .dokuwiki && chmod -R 700 .dokuwiki/ \
+    # Instalando a Dokuwiki
+    && mkdir /dokuwiki && ln -s /dokuwiki /var/www/localhost/htdocs/dokuwiki
 COPY nginx.conf /etc/nginx/http.d/default.conf
+COPY start.sh /usr/local/bin/start
+RUN chmod +x /usr/local/bin/start
 EXPOSE 80
 STOPSIGNAL SIGQUIT
 WORKDIR /var/www/localhost/htdocs/dokuwiki/
-# VOLUME /var/www/localhost/htdocs/dokuwiki/data
-CMD ["/bin/sh", "-c", "/usr/sbin/php-fpm7 && nginx -g 'daemon off;'"]
+VOLUME /dokuwiki
+# CMD ["/bin/sh", "-c", "/usr/sbin/php-fpm7 && nginx -g 'daemon off;'"]
+CMD ["/usr/local/bin/start"]
