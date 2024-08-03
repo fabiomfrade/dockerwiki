@@ -4,9 +4,9 @@
 
 Esse repositório é utilizado para a construção de imagem docker através de arquivo Dockerfile.
 
-Esta imagem é construída em cima do _Alpine Linux 3.15_ e com versão do _PHP_ 7; Também utiliza _NGINX_ versão 1.20 e sempre irá fazer o download da última versão disponível (Latest) do projeto Dokuwiki em seu repositório oficial.
+Esta imagem é construída em cima do _Alpine Linux Latest Version_ e com versão do _PHP_ 8; Também utiliza _NGINX_ e sempre irá fazer o download da última versão disponível (Latest) do projeto Dokuwiki em seu repositório oficial.
 
-Foi criado um script de inicialização (start.txt - convertido para sh dentro da imagem) cujo objetivo é verificar se o diretório mapeado para a pasta __dokuwiki__ está vazio ou não; Caso o diretório esteja vazio, o script irá copiar os arquivos base da dokuwiki previamente baixada, para o volume mapeado.
+Foi criado um script de inicialização cujo objetivo é verificar se o diretório mapeado para a pasta __dokuwiki__ está vazio ou não; Caso o diretório esteja vazio, o script irá copiar os arquivos base da dokuwiki previamente baixada, para o volume mapeado.
 
 com este script, a imagem te dá autonomia para utilizar uma instalação limpa da Wiki ou restaurar um backup previamente existente.
 
@@ -36,9 +36,9 @@ git clone https://github.com/fabiomfrade/dockerwiki.git
 
 This repository is used for building a Docker image through a Dockerfile.
 
-This image is built on top of Alpine Linux 3.15 and uses PHP version 7. It also incorporates NGINX version 1.20 and will always download the latest version available (Latest) of the Dokuwiki project from its official repository.
+This image is built on top of _Alpine Linux Latest Version_ and uses _PHP_ version 8. It also incorporates NGINX and will always download the latest version available (Latest) of the Dokuwiki project from its official repository.
 
-An initialization script (start.txt - converted to sh within the image) has been created with the goal of checking whether the mapped directory to the dokuwiki folder is empty or not. If the directory is empty, the script will copy the base files of the previously downloaded Dokuwiki to the mapped volume.
+An initialization script has been created with the goal of checking whether the mapped directory to the dokuwiki folder is empty or not. If the directory is empty, the script will copy the base files of the previously downloaded Dokuwiki to the mapped volume.
 
 With this script, the image provides autonomy to use a clean installation of the Wiki or restore a previously existing backup.
 
